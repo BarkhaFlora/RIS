@@ -2,169 +2,151 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine’s Surprise 💕</title>
+<title>Just One Question ❤️</title>
 
 <style>
-  body {
-    font-family: Georgia, serif;
-    background: #fff0f5;
-    margin: 0;
-    padding: 25px;
-    text-align: center;
-    overflow-x: hidden;
-  }
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+        overflow: hidden;
+    }
 
-  .container {
-    max-width: 360px;
-    margin: auto;
-  }
+    .container {
+        text-align: center;
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        max-width: 350px;
+    }
 
-  /* IMAGE — SMALL & SAFE */
-  .couple-img {
-    width: 130px;
-    height: auto;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-  }
+    img {
+        width: 180px;       /* compressed size */
+        height: auto;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
 
-  h1 {
-    font-size: 22px;
-    margin-bottom: 18px;
-  }
+    h1 {
+        color: #ff4d6d;
+        margin-bottom: 25px;
+    }
 
-  button {
-    padding: 10px 18px;
-    font-size: 15px;
-    margin: 8px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-  }
+    .buttons {
+        position: relative;
+        height: 80px;
+    }
 
-  #yesBtn {
-    background: #ff4f8b;
-    color: white;
-  }
+    button {
+        padding: 12px 30px;
+        font-size: 18px;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+    }
 
-  #noBtn {
-    background: #ddd;
-    position: relative;
-  }
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 
-  #celebration {
-    display: none;
-    margin-top: 25px;
-  }
+    #noBtn {
+        background: #ccc;
+        color: black;
+        left: 20px;
+        top: 0;
+    }
 
-  .heart {
-    position: fixed;
-    bottom: -20px;
-    font-size: 20px;
-    animation: floatUp linear forwards;
-  }
-
-  @keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-100vh); opacity: 0; }
-  }
+    .result {
+        margin-top: 20px;
+        font-size: 22px;
+        color: #ff4d6d;
+        display: none;
+        font-weight: bold;
+    }
 </style>
 </head>
 
 <body>
 
 <div class="container">
+    <!-- 🔴 REPLACE IMAGE URL BELOW -->
+    <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/couple.jpg" alt="Couple Image">
 
-  <!-- IMAGE (RAW GITHUB URL – GUARANTEED) -->
-  <img
-    src="https://raw.githubusercontent.com/BarkhaFlora/RIS/main/unnamed.jpg"
-    class="couple-img"
-    alt="Us 💖"
-  >
+    <h1>Will you marry me? 💍</h1>
 
-  <!-- QUESTION -->
-  <h1>Ishmeet, will you be my Valentine? 💕💖</h1>
+    <div class="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
 
-  <!-- BUTTONS -->
-  <button id="yesBtn">Yes 💖</button>
-  <button id="noBtn">No 😳</button>
-
-  <!-- CELEBRATION -->
-  <div id="celebration">
-    <h2>Yayyyyy!! 🎉💃</h2>
-    <p>Best decision ever 😍</p>
-    <img
-      src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
-      width="220"
-    >
-  </div>
-
+    <div class="result" id="resultText">
+        One best decision made ❤️✨
+    </div>
 </div>
 
-<!-- MUSIC -->
+<!-- 🔊 AUDIO -->
 <audio id="romanticMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b0cfaeaa2.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
 <audio id="dramaticMusic">
-  <source src="https://cdn.pixabay.com/audio/2022/10/18/audio_6e5e63fd25.mp3" type="audio/mpeg">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
 </audio>
 
 <script>
-  let noCount = 0;
-  const MAX_ESCAPES = 10; // 💥 HERE — 10 ATTEMPTS
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const result = document.getElementById("resultText");
 
-  let musicStarted = false;
+    const romanticMusic = document.getElementById("romanticMusic");
+    const dramaticMusic = document.getElementById("dramaticMusic");
 
-  const romanticMusic = document.getElementById("romanticMusic");
-  const dramaticMusic = document.getElementById("dramaticMusic");
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const celebration = document.getElementById("celebration");
+    let escapeCount = 0;
+    const maxEscapes = 10;
+    let musicStarted = false;
 
-  /* START ROMANTIC MUSIC ON FIRST INTERACTION */
-  document.body.addEventListener("click", () => {
-    if (!musicStarted) {
-      romanticMusic.volume = 0.6;
-      romanticMusic.play();
-      musicStarted = true;
-    }
-  }, { once: true });
+    // 🎵 Start romantic music on first user interaction
+    document.body.addEventListener("click", () => {
+        if (!musicStarted) {
+            romanticMusic.play();
+            musicStarted = true;
+        }
+    }, { once: true });
 
-  /* NO BUTTON ESCAPES ON HOVER / TOUCH */
-  function moveNoButton() {
-    noCount++;
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * 80 + "vw";
-    noBtn.style.top = Math.random() * 80 + "vh";
+    // 🏃 No button escapes on hover
+    noBtn.addEventListener("mouseenter", () => {
+        if (escapeCount >= maxEscapes) {
+            noBtn.style.display = "none";
+            return;
+        }
 
-    if (noCount >= MAX_ESCAPES) {
-      noBtn.style.display = "none";
-    }
-  }
+        escapeCount++;
 
-  noBtn.addEventListener("mouseover", moveNoButton);   // desktop
-  noBtn.addEventListener("touchstart", moveNoButton);  // mobile
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
 
-  /* YES CLICK */
-  yesBtn.addEventListener("click", () => {
-    celebration.style.display = "block";
-    romanticMusic.pause();
-    dramaticMusic.play();
-    startHearts();
-  });
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
 
-  function startHearts() {
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💖";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
-  }
+    // ❤️ Yes button logic
+    yesBtn.addEventListener("click", () => {
+        romanticMusic.pause();
+        dramaticMusic.play();
+
+        result.style.display = "block";
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+    });
 </script>
 
 </body>
