@@ -1,81 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Valentine 💖</title>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background-color: #ffb6c1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #ffb6c1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
 
-    .container {
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
+  .container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 30px;
-    }
+  h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
 
-    button {
-      font-size: 20px;
-      padding: 12px 30px;
-      margin: 10px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-    }
+  button {
+    font-size: 20px;
+    padding: 12px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+  }
 
-    #yesBtn {
-      background-color: #ff4d6d;
-      color: white;
-    }
+  #yesBtn {
+    background: #ff4d6d;
+    color: white;
+  }
 
-    #noBtn {
-      background-color: white;
-      position: absolute;
-    }
+  #noBtn {
+    background: white;
+    position: absolute;
+  }
 
-    #result {
-      font-size: 28px;
-      margin-top: 30px;
-      display: none;
-    }
+  #result {
+    display: none;
+    margin-top: 30px;
+    font-size: 28px;
+  }
 
-    #result img {
-      width: 260px;
-      margin-top: 20px;
-    }
+  #result img {
+    width: 240px;
+    margin-top: 20px;
+  }
 
-    /* HEART SHOWER */
-    .heart {
-      position: fixed;
-      top: -20px;
-      font-size: 24px;
-      animation: fall linear forwards;
-      z-index: 1;
-    }
+  .heart {
+    position: fixed;
+    top: -40px;
+    font-size: 40px;
+    animation: fall linear forwards;
+    z-index: 1;
+  }
 
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
+  @keyframes fall {
+    to {
+      transform: translateY(120vh);
+      opacity: 0;
     }
-  </style>
+  }
+</style>
 </head>
 
 <body>
 
-  <div class="container">
-    <h1>Ishmeet, will you be m
+<div class="container">
+  <h1>Ishmeet, will you be my Valentine? 💕💖</h1>
+
+  <button id="yesBtn">Yes</button>
+  <button id="noBtn">No</button>
+
+  <div id="result">
+    <div>Yayyyyy!! Best decision ever made 🎉😈</div>
+    <img src="https://media.giphy.com/media/26u4nJPf0JtQPdStq/giphy.gif" alt="Celebration">
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="romanticMusic" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="dramaticMusic">
+  <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const result = document.getElementById("result");
+  const romanticMusic = document.getElementById("romanticMusic");
+  const dramaticMusic = document.getElementById("dramaticMusic");
+
+  let escapes = 0;
+  const maxEscapes = 10;
+  let musicStarted = false;
+
+  document.body.addEventListener("click", () => {
+    if (!musicStarted) {
+      romanticMusic.play().catch(() => {});
+      musicStarted = true;
+    }
+  }, { once: true });
+
+  function moveNo() {
+    if (escapes >= maxEscapes) {
+      noBtn.style.display = "none";
+      return;
+    }
+
+    escapes++;
+
+    noBtn.style.left = Math.random() * (window.innerWidth - 150) + "px";
+    noBtn.style.top = Math.random() * (window.innerHeight - 150) + "px";
+  }
+
+  noBtn.addEventListe
