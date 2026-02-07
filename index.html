@@ -40,3 +40,83 @@
       padding: 12px 25px;
       font-size: 16px;
       border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #ccc;
+      color: #333;
+      position: absolute;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #e91e63;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Soft music when page opens -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Happy music after YES -->
+  <audio id="yesMusic">
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <!-- 🔴 CHANGE IMAGE NAME HERE -->
+    <img src="couple.jpg" alt="Us ❤️">
+
+    <h1>Ishmeet, will you be my Valentine? 💕</h1>
+
+    <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+    <button id="noBtn" onclick="moveNo()">No 🙈</button>
+
+    <div id="message">Yayyy!!! ❤️🥰 You made my day!</div>
+  </div>
+
+  <script>
+    let noCount = 0;
+
+    function moveNo() {
+      const noBtn = document.getElementById("noBtn");
+      noCount++;
+
+      if (noCount >= 6) {
+        noBtn.style.display = "none";
+        return;
+      }
+
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function sayYes() {
+      document.getElementById("bgMusic").pause();
+      document.getElementById("yesMusic").play();
+
+      document.getElementById("yesBtn").style.display = "none";
+      document.getElementById("noBtn").style.display = "none";
+
+      document.getElementById("message").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
