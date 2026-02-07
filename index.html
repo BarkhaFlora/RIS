@@ -1,155 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Valentine’s Sneaky Surprise 💖</title>
+<meta charset="UTF-8">
+<title>Valentine’s Sneaky Surprise 💖</title>
 
-  <style>
-    body {
-      font-family: "Georgia", serif;
-      background: #fff5f8;
-      text-align: center;
-      margin: 0;
-      padding: 40px 20px;
-      overflow-x: hidden;
-    }
+<style>
+  body {
+    font-family: "Georgia", serif;
+    background: #fff0f5;
+    margin: 0;
+    padding: 30px 15px;
+    text-align: center;
+    overflow-x: hidden;
+  }
 
-    .container {
-      max-width: 420px;
-      margin: auto;
-    }
+  .container {
+    max-width: 360px;
+    margin: auto;
+  }
 
-    .couple-img {
-      width: 200px;
-      max-width: 80%;
-      height: auto;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
+  /* IMAGE — FIXED SIZE */
+  .couple-img {
+    width: 140px;          /* <<< SMALLER */
+    height: auto;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
 
-    h1 {
-      font-size: 26px;
-      margin-bottom: 20px;
-    }
+  h1 {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 10px;
-      cursor: pointer;
-      border-radius: 8px;
-      border: none;
-    }
+  button {
+    padding: 10px 18px;
+    font-size: 15px;
+    margin: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+  }
 
-    #yesBtn {
-      background: #ff5c8d;
-      color: white;
-    }
+  #yesBtn {
+    background: #ff4f8b;
+    color: white;
+  }
 
-    #noBtn {
-      background: #ddd;
-    }
+  #noBtn {
+    background: #e0e0e0;
+  }
 
-    #celebration {
-      display: none;
-      margin-top: 30px;
-    }
+  #celebration {
+    display: none;
+    margin-top: 25px;
+  }
 
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      font-size: 20px;
-      animation: floatUp linear forwards;
-    }
+  .heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp linear forwards;
+  }
 
-    @keyframes floatUp {
-      from {
-        transform: translateY(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateY(-100vh);
-        opacity: 0;
-      }
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 1;
     }
-  </style>
+    to {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+  }
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- Couple Image -->
-    <img src="unnamed.jpg" class="couple-img" alt="Us ❤️">
+  <!-- IMAGE -->
+  <img src="unnamed.jpg" class="couple-img" alt="Us ❤️">
 
-    <!-- Question -->
-    <h1>Ishmeet, will you be my Valentine? 💕💖</h1>
+  <!-- QUESTION -->
+  <h1>Ishmeet, will you be my Valentine? 💕💖</h1>
 
-    <!-- Buttons -->
-    <div>
-      <button id="yesBtn">Yes 💖</button>
-      <button id="noBtn">No 😳</button>
-    </div>
-
-    <!-- Celebration (hidden initially) -->
-    <div id="celebration">
-      <h2>Yayyyyy!! 🎉💃</h2>
-      <p>Best decision ever 😍</p>
-      <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="260">
-    </div>
-
+  <!-- BUTTONS -->
+  <div>
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 😳</button>
   </div>
 
-  <!-- Music -->
-  <audio id="bgMusic" autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
-  </audio>
+  <!-- CELEBRATION -->
+  <div id="celebration">
+    <h2>Yayyyyy!! 🎉💃</h2>
+    <p>Best decision ever 😍</p>
+    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="220">
+  </div>
 
-  <audio id="yesMusic">
-    <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3">
-  </audio>
+</div>
 
-  <script>
-    let noCount = 0;
+<!-- MUSIC -->
+<audio id="romanticMusic" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
 
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const celebration = document.getElementById("celebration");
-    const bgMusic = document.getElementById("bgMusic");
-    const yesMusic = document.getElementById("yesMusic");
+<audio id="dramaticMusic">
+  <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3">
+</audio>
 
-    noBtn.addEventListener("click", () => {
-      noCount++;
-      noBtn.style.position = "absolute";
-      noBtn.style.left = Math.random() * 80 + "vw";
-      noBtn.style.top = Math.random() * 80 + "vh";
+<script>
+  let noCount = 0;
+  let musicStarted = false;
 
-      if (noCount >= 6) {
-        noBtn.style.display = "none";
-      }
-    });
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const celebration = document.getElementById("celebration");
 
-    yesBtn.addEventListener("click", () => {
-      celebration.style.display = "block";
-      bgMusic.pause();
-      yesMusic.play();
-      startHearts();
-    });
+  const romanticMusic = document.getElementById("romanticMusic");
+  const dramaticMusic = document.getElementById("dramaticMusic");
 
-    function startHearts() {
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 6000);
-      }, 300);
+  /* START ROMANTIC MUSIC ON FIRST CLICK ANYWHERE */
+  document.body.addEventListener("click", () => {
+    if (!musicStarted) {
+      romanticMusic.play();
+      musicStarted = true;
     }
-  </script>
+  }, { once: true });
+
+  /* NO BUTTON RUNS AWAY */
+  noBtn.addEventListener("click", () => {
+    noCount++;
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * 80 + "vw";
+    noBtn.style.top = Math.random() * 80 + "vh";
+
+    if (noCount >= 6) {
+      noBtn.style.display = "none";
+    }
+  });
+
+  /* YES CLICK */
+  yesBtn.addEventListener("click", () => {
+    celebration.style.display = "block";
+    romanticMusic.pause();
+    dramaticMusic.play();
+    startHearts();
+  });
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  }
+</script>
 
 </body>
 </html>
