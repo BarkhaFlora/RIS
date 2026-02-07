@@ -1,111 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Just One Question ❤️</title>
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
 
-<style>
+  <style>
     body {
-        margin: 0;
-        height: 100vh;
-        background: linear-gradient(135deg, #ff758c, #ff7eb3);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Arial', sans-serif;
-        overflow: hidden;
+      margin: 0;
+      height: 100vh;
+      background-color: #ffb6c1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
     }
 
     .container {
-        text-align: center;
-        background: white;
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        max-width: 350px;
-    }
-
-    img {
-        width: 180px;       /* compressed size */
-        height: auto;
-        border-radius: 15px;
-        margin-bottom: 20px;
+      text-align: center;
+      position: relative;
     }
 
     h1 {
-        color: #ff4d6d;
-        margin-bottom: 25px;
-    }
-
-    .buttons {
-        position: relative;
-        height: 80px;
+      font-size: 32px;
+      margin-bottom: 30px;
     }
 
     button {
-        padding: 12px 30px;
-        font-size: 18px;
-        border-radius: 30px;
-        border: none;
-        cursor: pointer;
-        position: absolute;
+      font-size: 20px;
+      padding: 12px 30px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
     #yesBtn {
-        background: #ff4d6d;
-        color: white;
-        left: 50%;
-        transform: translateX(-50%);
+      background-color: #ff4d6d;
+      color: white;
     }
 
     #noBtn {
-        background: #ccc;
-        color: black;
-        left: 20px;
-        top: 0;
+      background-color: white;
+      position: absolute;
     }
 
-    .result {
-        margin-top: 20px;
-        font-size: 22px;
-        color: #ff4d6d;
-        display: none;
-        font-weight: bold;
+    #result {
+      font-size: 28px;
+      margin-top: 30px;
+      display: none;
     }
-</style>
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-    <!-- 🔴 REPLACE IMAGE URL BELOW -->
-    <img src="https://raw.githubusercontent.com/USERNAME/REPO/main/couple.jpg" alt="Couple Image">
+  <div class="container">
+    <h1>Ishmeet, will you be my Valentine? 💖💖</h1>
 
-    <h1>Will you marry me? 💍</h1>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
 
-    <div class="buttons">
-        <button id="yesBtn">Yes ❤️</button>
-        <button id="noBtn">No 🙈</button>
-    </div>
+    <div id="result">Yayyyyy!! Best decision ever made 🎉💃</div>
+  </div>
 
-    <div class="result" id="resultText">
-        One best decision made ❤️✨
-    </div>
-</div>
+  <!-- MUSIC -->
+  <audio id="romanticMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+  </audio>
 
-<!-- 🔊 AUDIO -->
-<audio id="romanticMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
+  <audio id="dramaticMusic">
+    <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mpeg">
+  </audio>
 
-<audio id="dramaticMusic">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
-</audio>
-
-<script>
+  <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
-    const result = document.getElementById("resultText");
+    const result = document.getElementById("result");
 
     const romanticMusic = document.getElementById("romanticMusic");
     const dramaticMusic = document.getElementById("dramaticMusic");
@@ -114,40 +84,44 @@
     const maxEscapes = 10;
     let musicStarted = false;
 
-    // 🎵 Start romantic music on first user interaction
+    // Start romantic music on first interaction
     document.body.addEventListener("click", () => {
-        if (!musicStarted) {
-            romanticMusic.play();
-            musicStarted = true;
-        }
+      if (!musicStarted) {
+        romanticMusic.play().catch(() => {});
+        musicStarted = true;
+      }
     }, { once: true });
 
-    // 🏃 No button escapes on hover
-    noBtn.addEventListener("mouseenter", () => {
-        if (escapeCount >= maxEscapes) {
-            noBtn.style.display = "none";
-            return;
-        }
-
-        escapeCount++;
-
-        const x = Math.random() * (window.innerWidth - 100);
-        const y = Math.random() * (window.innerHeight - 100);
-
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    });
-
-    // ❤️ Yes button logic
-    yesBtn.addEventListener("click", () => {
-        romanticMusic.pause();
-        dramaticMusic.play();
-
-        result.style.display = "block";
-        yesBtn.style.display = "none";
+    function moveNo() {
+      if (escapeCount >= maxEscapes) {
         noBtn.style.display = "none";
+        return;
+      }
+
+      escapeCount++;
+
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    // Hover (laptop)
+    noBtn.addEventListener("mouseenter", moveNo);
+
+    // Touch (mobile)
+    noBtn.addEventListener("touchstart", moveNo);
+
+    yesBtn.addEventListener("click", () => {
+      romanticMusic.pause();
+      dramaticMusic.play().catch(() => {});
+
+      result.style.display = "block";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
     });
-</script>
+  </script>
 
 </body>
 </html>
