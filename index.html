@@ -13,11 +13,13 @@
       justify-content: center;
       align-items: center;
       font-family: Arial, sans-serif;
+      overflow: hidden;
     }
 
     .container {
       text-align: center;
       position: relative;
+      z-index: 2;
     }
 
     h1 {
@@ -30,7 +32,7 @@
       padding: 12px 30px;
       margin: 10px;
       border: none;
-      border-radius: 8px;
+      border-radius: 25px;
       cursor: pointer;
     }
 
@@ -49,79 +51,31 @@
       margin-top: 30px;
       display: none;
     }
+
+    #result img {
+      width: 260px;
+      margin-top: 20px;
+    }
+
+    /* HEART SHOWER */
+    .heart {
+      position: fixed;
+      top: -20px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <div class="container">
-    <h1>Ishmeet, will you be my Valentine? 💖💖</h1>
-
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-
-    <div id="result">Yayyyyy!! Best decision ever made 🎉💃</div>
-  </div>
-
-  <!-- MUSIC -->
-  <audio id="romanticMusic" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-  </audio>
-
-  <audio id="dramaticMusic">
-    <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
-    const result = document.getElementById("result");
-
-    const romanticMusic = document.getElementById("romanticMusic");
-    const dramaticMusic = document.getElementById("dramaticMusic");
-
-    let escapeCount = 0;
-    const maxEscapes = 10;
-    let musicStarted = false;
-
-    // Start romantic music on first interaction
-    document.body.addEventListener("click", () => {
-      if (!musicStarted) {
-        romanticMusic.play().catch(() => {});
-        musicStarted = true;
-      }
-    }, { once: true });
-
-    function moveNo() {
-      if (escapeCount >= maxEscapes) {
-        noBtn.style.display = "none";
-        return;
-      }
-
-      escapeCount++;
-
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 120);
-
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    }
-
-    // Hover (laptop)
-    noBtn.addEventListener("mouseenter", moveNo);
-
-    // Touch (mobile)
-    noBtn.addEventListener("touchstart", moveNo);
-
-    yesBtn.addEventListener("click", () => {
-      romanticMusic.pause();
-      dramaticMusic.play().catch(() => {});
-
-      result.style.display = "block";
-      yesBtn.style.display = "none";
-      noBtn.style.display = "none";
-    });
-  </script>
-
-</body>
-</html>
+    <h1>Ishmeet, will you be m
