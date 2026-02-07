@@ -2,134 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Valentine's Sneaky Surprise</title>
+  <title>For You ❤️</title>
   <style>
     body {
-      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #fff0f5);
       height: 100vh;
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-family: 'Georgia', serif;
-      background: #fff;
-      overflow: hidden;
     }
 
     .container {
-      max-width: 600px;
-    }
-
-    h1 {
-      font-size: 32px;
-    }
-
-    button {
-      font-size: 18px;
-      padding: 10px 20px;
-      margin: 10px;
-      cursor: pointer;
-    }
-
-    #result {
-      display: none;
-      margin-top: 20px;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
     }
 
     img {
-      margin-top: 15px;
-      width: 300px;
-      max-width: 90%;
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
     }
 
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      font-size: 24px;
-      animation: floatUp linear forwards;
+    h1 {
+      color: #e91e63;
+      margin-bottom: 20px;
     }
 
-    @keyframes floatUp {
-      to {
-        transform: translateY(-110vh);
-        opacity: 0;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<div class="container">
-  <h1>Ishmeet, will you be my Valentine? 💕💖</h1>
-
-  <button id="yesBtn">Yes 💖</button>
-  <button id="noBtn">No 😳</button>
-
-  <div id="result">
-    <h2>Yayyyyy!! 🎉💃</h2>
-    <p>Best decision ever made 😍</p>
-    <img src="https://media.giphy.com/media/l4JyOCNEfXvVYEqB2/giphy.gif" alt="celebration">
-  </div>
-</div>
-
-<!-- Music -->
-<audio id="softMusic" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="celebrationMusic">
-  <source src="https://www.bensound.com/bensound-music/bensound-dance.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-  const result = document.getElementById("result");
-  const softMusic = document.getElementById("softMusic");
-  const celebrationMusic = document.getElementById("celebrationMusic");
-
-  let noCount = 0;
-
-  // Start soft music on first click anywhere
-  document.body.addEventListener("click", () => {
-    softMusic.volume = 0.4;
-    softMusic.play();
-  }, { once: true });
-
-  noBtn.addEventListener("mouseover", () => {
-    noCount++;
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * 80 + "vw";
-    noBtn.style.top = Math.random() * 80 + "vh";
-
-    if (noCount >= 6) {
-      noBtn.style.display = "none";
-    }
-  });
-
-  yesBtn.addEventListener("click", () => {
-    softMusic.pause();
-    celebrationMusic.volume = 0.7;
-    celebrationMusic.play();
-
-    result.style.display = "block";
-    yesBtn.style.display = "none";
-    noBtn.style.display = "none";
-
-    setInterval(createHeart, 300);
-  });
-
-  function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = 4 + Math.random() * 3 + "s";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 7000);
-  }
-</script>
-
-</body>
-</html>
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      border: none;
