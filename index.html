@@ -11,6 +11,7 @@
     margin: 0;
     padding: 25px;
     text-align: center;
+    overflow-x: hidden;
   }
 
   .container {
@@ -48,6 +49,7 @@
 
   #noBtn {
     background: #ddd;
+    position: relative;
   }
 
   #celebration {
@@ -73,8 +75,12 @@
 
 <div class="container">
 
-  <!-- IMAGE -->
-  <img src="./unnamed.jpg" class="couple-img" alt="Us 💖">
+  <!-- IMAGE (RAW GITHUB URL – GUARANTEED) -->
+  <img
+    src="https://raw.githubusercontent.com/BarkhaFlora/RIS/main/unnamed.jpg"
+    class="couple-img"
+    alt="Us 💖"
+  >
 
   <!-- QUESTION -->
   <h1>Ishmeet, will you be my Valentine? 💕💖</h1>
@@ -86,8 +92,11 @@
   <!-- CELEBRATION -->
   <div id="celebration">
     <h2>Yayyyyy!! 🎉💃</h2>
-    <p>You just made me the happiest ❤️</p>
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="220">
+    <p>Best decision ever 😍</p>
+    <img
+      src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
+      width="220"
+    >
   </div>
 
 </div>
@@ -103,6 +112,8 @@
 
 <script>
   let noCount = 0;
+  const MAX_ESCAPES = 10; // 💥 HERE — 10 ATTEMPTS
+
   let musicStarted = false;
 
   const romanticMusic = document.getElementById("romanticMusic");
@@ -111,7 +122,7 @@
   const yesBtn = document.getElementById("yesBtn");
   const celebration = document.getElementById("celebration");
 
-  /* START ROMANTIC MUSIC ON FIRST CLICK */
+  /* START ROMANTIC MUSIC ON FIRST INTERACTION */
   document.body.addEventListener("click", () => {
     if (!musicStarted) {
       romanticMusic.volume = 0.6;
@@ -120,14 +131,20 @@
     }
   }, { once: true });
 
-  /* NO BUTTON ESCAPE */
-  noBtn.addEventListener("click", () => {
+  /* NO BUTTON ESCAPES ON HOVER / TOUCH */
+  function moveNoButton() {
     noCount++;
     noBtn.style.position = "absolute";
     noBtn.style.left = Math.random() * 80 + "vw";
     noBtn.style.top = Math.random() * 80 + "vh";
-    if (noCount >= 6) noBtn.style.display = "none";
-  });
+
+    if (noCount >= MAX_ESCAPES) {
+      noBtn.style.display = "none";
+    }
+  }
+
+  noBtn.addEventListener("mouseover", moveNoButton);   // desktop
+  noBtn.addEventListener("touchstart", moveNoButton);  // mobile
 
   /* YES CLICK */
   yesBtn.addEventListener("click", () => {
