@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine’s Sneaky Surprise 💖</title>
+<title>Valentine’s Surprise 💕</title>
 
 <style>
   body {
-    font-family: "Georgia", serif;
+    font-family: Georgia, serif;
     background: #fff0f5;
     margin: 0;
-    padding: 30px 15px;
+    padding: 25px;
     text-align: center;
-    overflow-x: hidden;
   }
 
   .container {
@@ -19,13 +18,13 @@
     margin: auto;
   }
 
-  /* IMAGE — FIXED SIZE */
+  /* IMAGE — SMALL & SAFE */
   .couple-img {
-    width: 140px;          /* <<< SMALLER */
+    width: 130px;
     height: auto;
-    border-radius: 14px;
-    margin-bottom: 18px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
   }
 
   h1 {
@@ -48,7 +47,7 @@
   }
 
   #noBtn {
-    background: #e0e0e0;
+    background: #ddd;
   }
 
   #celebration {
@@ -64,14 +63,8 @@
   }
 
   @keyframes floatUp {
-    from {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateY(-100vh);
-      opacity: 0;
-    }
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
   }
 </style>
 </head>
@@ -81,21 +74,19 @@
 <div class="container">
 
   <!-- IMAGE -->
-  <img src="unnamed.jpg" class="couple-img" alt="Us ❤️">
+  <img src="./unnamed.jpg" class="couple-img" alt="Us 💖">
 
   <!-- QUESTION -->
   <h1>Ishmeet, will you be my Valentine? 💕💖</h1>
 
   <!-- BUTTONS -->
-  <div>
-    <button id="yesBtn">Yes 💖</button>
-    <button id="noBtn">No 😳</button>
-  </div>
+  <button id="yesBtn">Yes 💖</button>
+  <button id="noBtn">No 😳</button>
 
   <!-- CELEBRATION -->
   <div id="celebration">
     <h2>Yayyyyy!! 🎉💃</h2>
-    <p>Best decision ever 😍</p>
+    <p>You just made me the happiest ❤️</p>
     <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" width="220">
   </div>
 
@@ -103,42 +94,39 @@
 
 <!-- MUSIC -->
 <audio id="romanticMusic" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6b0cfaeaa2.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="dramaticMusic">
-  <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3">
+  <source src="https://cdn.pixabay.com/audio/2022/10/18/audio_6e5e63fd25.mp3" type="audio/mpeg">
 </audio>
 
 <script>
   let noCount = 0;
   let musicStarted = false;
 
+  const romanticMusic = document.getElementById("romanticMusic");
+  const dramaticMusic = document.getElementById("dramaticMusic");
   const noBtn = document.getElementById("noBtn");
   const yesBtn = document.getElementById("yesBtn");
   const celebration = document.getElementById("celebration");
 
-  const romanticMusic = document.getElementById("romanticMusic");
-  const dramaticMusic = document.getElementById("dramaticMusic");
-
-  /* START ROMANTIC MUSIC ON FIRST CLICK ANYWHERE */
+  /* START ROMANTIC MUSIC ON FIRST CLICK */
   document.body.addEventListener("click", () => {
     if (!musicStarted) {
+      romanticMusic.volume = 0.6;
       romanticMusic.play();
       musicStarted = true;
     }
   }, { once: true });
 
-  /* NO BUTTON RUNS AWAY */
+  /* NO BUTTON ESCAPE */
   noBtn.addEventListener("click", () => {
     noCount++;
     noBtn.style.position = "absolute";
     noBtn.style.left = Math.random() * 80 + "vw";
     noBtn.style.top = Math.random() * 80 + "vh";
-
-    if (noCount >= 6) {
-      noBtn.style.display = "none";
-    }
+    if (noCount >= 6) noBtn.style.display = "none";
   });
 
   /* YES CLICK */
