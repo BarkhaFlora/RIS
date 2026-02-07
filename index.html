@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+const heart = document.createElement('div');
+heart.className = 'heart';
+heart.innerHTML = '❤';
+heart.style.left = Math.random() * 100 + 'vw';
+heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+document.body.appendChild(heart);
+}
+</script>
+
+
+<!-- Background music (plays after first click) -->
+<audio id="bgMusic" loop>
+<!-- Replace this with your favourite romantic song URL -->
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- Question Card -->
+<div class="card" id="questionCard">
+<!-- Replace with your own image URL -->
+<h2>Ishmeet, will you be my Valentine? 💕💖</h2>
+<div class="buttons">
+<button id="yesBtn">Yes 💕</button>
+<button id="noBtn">No 🙃</button>
+</div>
+</div>
+
+
+<!-- Celebration Screen -->
+<div class="card hidden celebrate" id="celebrateCard">
+<h1>Yayyyyy!! 🎉💃</h1>
+<p>Best decision ever made 😍</p>
+<img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Celebration" />
+</div>
+
+
+<script>
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const questionCard = document.getElementById('questionCard');
+const celebrateCard = document.getElementById('celebrateCard');
+const bgMusic = document.getElementById('bgMusic');
+
+
+let speed = 120;
+
+
+noBtn.addEventListener('mouseover', () => {
+speed += 30;
+const x = Math.random() * speed - speed / 2;
+const y = Math.random() * speed - speed / 2;
+noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+
+document.body.addEventListener('click', () => {
+bgMusic.play().catch(() => {});
+}, { once: true });
+
+
+yesBtn.addEventListener('click', () => {
+questionCard.classList.add('hidden');
+celebrateCard.classList.remove('hidden');
+});
+</script>
+
+
+</body>
+</html>
